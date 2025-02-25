@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -28,16 +30,25 @@ const statusColors = {
   COMPLETED: "bg-emerald-100 text-emerald-800",
 };
 
-export function TaskCard({
+const formatStatus = (status: Status | undefined): string => {
+  if (!status) return "Not Started";
+  return status.replace("_", " ");
+};
+
+export default function TaskCard({
   id,
   title,
   description,
   difficulty,
   points,
   status,
-  image = "/images/task-default.jpg",
+  image,
 }: TaskCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  // Проверяем наличие изображения и ошибки загрузки
+  const hasValidImage = image && !imageError;
 
   return (
     <motion.div
@@ -52,13 +63,24 @@ export function TaskCard({
     >
       <Link href={`/tasks/${id}`} className="block h-full">
         <div className="absolute inset-0">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-            priority
-          />
+          {hasValidImage ? (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+              priority
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <Image
+              src="/placeholder.svg"
+              alt="Placeholder"
+              fill
+              className="object-cover"
+              priority
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         </div>
 
@@ -92,10 +114,10 @@ export function TaskCard({
             <span
               className={clsx(
                 "px-3 py-1 rounded-full text-sm font-medium",
-                statusColors[status]
+                statusColors[status] || statusColors.NOT_STARTED
               )}
             >
-              {status.replace("_", " ")}
+              {status ? formatStatus(status) : "Not Started"}
             </span>
 
             <motion.div

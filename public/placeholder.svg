@@ -1,0 +1,7 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" fill="#F3F4F6"/>
+  <rect x="1" y="1" width="638" height="358" stroke="#D1D5DB" stroke-width="2"/>
+  <path d="M320 160C307.634 160 297.5 170.134 297.5 182.5C297.5 194.866 307.634 205 320 205C332.366 205 342.5 194.866 342.5 182.5C342.5 170.134 332.366 160 320 160Z" fill="#9CA3AF"/>
+  <path d="M240 270H400L365 225L315 270L290 240L240 270Z" fill="#9CA3AF"/>
+  <text x="320" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#6B7280">Нет изображения</text>
+</svg>
